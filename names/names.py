@@ -1,5 +1,5 @@
 import time
-from binary_search_tree import BSTNode as bst
+from binary_search_tree import BSTNode 
 
 # start_time = time.time()
 
@@ -22,7 +22,6 @@ from binary_search_tree import BSTNode as bst
 # end_time = time.time()
 # print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
 # print (f"runtime: {end_time - start_time} seconds")
-
 start_time = time.time()
 
 f = open('names_1.txt', 'r')
@@ -33,14 +32,45 @@ f = open('names_2.txt', 'r')
 names_2 = f.read().split("\n")  # List containing 10000 names
 f.close()
 
-# Return the list of duplicates in this data structure
-# using sets
-duplicates = [name for name in (set(names_1) & set(names_2))]
+duplicates = []  # Return the list of duplicates in this data structure
+
+# grab the first name to start tree
+bst = BSTNode(names_1[0])
+
+# insert the rest from first file into the tree
+for name in names_1[1:]:
+    bst.insert(name)
+
+for name in names_2:
+    if bst.contains(name):
+        duplicates.append(name)
 
 
 end_time = time.time()
-print(f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
-print(f"runtime: {end_time - start_time} seconds")
+print(
+    f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
+print(f"runtime: {end_time - start_time} seconds*******Logarithmic Time******")
+
+
+#--STRETCHT---
+# start_time = time.time()
+
+# f = open('names_1.txt', 'r')
+# names_1 = f.read().split("\n")  # List containing 10000 names
+# f.close()
+
+# f = open('names_2.txt', 'r')
+# names_2 = f.read().split("\n")  # List containing 10000 names
+# f.close()
+
+# # Return the list of duplicates in this data structure
+# # using sets
+# duplicates = [name for name in (set(names_1) & set(names_2))]
+
+
+# end_time = time.time()
+# print(f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
+# print(f"runtime: {end_time - start_time} seconds")
 
 
 
